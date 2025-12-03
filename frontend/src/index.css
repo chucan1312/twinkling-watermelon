@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+body {
+    font-family:  "Pixelify Sans", "ＭＳ Ｐゴシック", sans-serif;
+}
+
+.text-outline {
+    -webkit-text-stroke: 1px rgb(171, 122, 66); /* For WebKit browsers */
+    text-stroke: 1px rgb(171, 122, 66); /* Standard property */
+  }
