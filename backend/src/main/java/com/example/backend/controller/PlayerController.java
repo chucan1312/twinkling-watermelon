@@ -37,4 +37,9 @@ public class PlayerController {
     public Player tickPlayer(@PathVariable Long id) {
         return playerService.tick(id);
     }
+
+    @PostMapping("/{id}/purchase/{item}")
+    public Player purchasePlayer(@PathVariable Long id, @PathVariable String item) {
+        return playerService.purchase(id, item);
+    }
 }
