@@ -1,10 +1,46 @@
 @import "tailwindcss";
 
 body {
-    font-family:  "Pixelify Sans", "ＭＳ Ｐゴシック", sans-serif;
+    font-family: "Pixelify Sans", "ＭＳ Ｐゴシック", sans-serif;
 }
 
 .text-outline {
-    -webkit-text-stroke: 1px rgb(171, 122, 66); /* For WebKit browsers */
-    text-stroke: 1px rgb(171, 122, 66); /* Standard property */
-  }
+    -webkit-text-stroke: 1px rgb(171, 122, 66);
+    /* For WebKit browsers */
+    text-stroke: 1px rgb(171, 122, 66);
+    /* Standard property */
+}
+
+.start-btn {
+    @apply px-4 py-2 bg-[#f0c76e] text-[#8b5a2b] font-semibold border-2 border-[#8b5a2b] cursor-pointer transition-all duration-100;
+
+    /* Pixel drop shadow */
+    box-shadow: 4px 4px 0px 0px #8b5a2b;
+}
+
+.start-btn:hover {
+    @apply brightness-108;
+}
+
+.pixel-art-btn {
+    position: relative;
+    cursor: pointer;
+    border: none;
+}
+
+.pixel-art-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: transparent; 
+
+    /* PIXEL ROUNDED CORNERS */
+    box-shadow:
+        /* Sides */
+        0 -4px 0 0 rgb(171, 122, 66),
+        0 4px 0 0 rgb(171, 122, 66),
+        -4px 0 0 0 rgb(171, 122, 66),
+        4px 0 0 0 rgb(171, 122, 66)
+    ;
+}

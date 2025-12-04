@@ -74,21 +74,25 @@ function App() {
         <div>
 
             {!player && (
-                <div className="space-y-4 max-w-sm mx-auto">
-
+                <div className="space-y-4 max-w-sm mx-auto min-h-screen flex flex-col justify-center items-center bg-gray-200 min-w-screen">
+                    <img src="./images/gamelogo.png" className="scale-120 mb-10"/>
                     <input
                         value={nameInput}
                         onChange={(e) => setNameInput(e.target.value)}
-                        className="border p-2 rounded w-full"
+                        className="border border-[#8b5a2b] p-2 w-100 lg:w-130 focus:outline-none focus:border-2 focus:placeholder-transparent"
                         placeholder="Enter your name..."
                     />
 
                     <button
                         onClick={createPlayer}
-                        className="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded w-full"
+                        className="start-btn w-100 lg:w-130"
                     >
                         Start Game
                     </button>
+                    <div className=" mt-6"> Inspired by the kdrama 
+                        <span className="text-[#ff7d93]"> Twinkling</span> 
+                        <span className="text-[#22b14c]"> Watermelon</span> 
+                    </div>
 
                 </div>
             )}
@@ -112,23 +116,22 @@ function App() {
 
                                     <button
                                         onClick={() => setOpen(!open)}
-                                        className="relative bg-primary text-primary-foreground px-2 py-5 h-fixed border-[2px] border-r-0 border-[rgb(171,122,66)] bg-[#f0c76e]"
+                                        className="relative bg-primary text-primary-foreground px-2 py-5 h-fixed  border-4 border-r-0 border-[rgb(171,122,66)] bg-[#f0c76e] hover:bg-[#e0b65a] hover:cursor-pointer"
                                     >
                                         {open ? <img src="./images/right-arrow.png" /> : <img src="./images/left-arrow.png" />}
                                     </button>
 
                                     {open && (
-                                        <div className="grid grid-cols-1 gap-3 p-3 border-2 border-[rgb(171,122,66)] backdrop-blur-xl">
+                                        <div className="grid grid-cols-1 gap-5 p-5 border-4 border-r-0 border-[rgb(171,122,66)] backdrop-blur-xl">
                                             {SHOP_ITEMS.map(item => {
                                                 const itemName = item.name; 
                                                 return(
                                                     <button
                                                         onClick={() => purchase(itemName)} 
-                                                        className="bg-[#f0c76e] text-[rgb(171,122,66)] px-2 py-1"
+                                                        className="pixel-art-btn bg-[#f0c76e] text-[rgb(171,122,66)] px-2 py-1 leading-tight hover:bg-[#e0b65a]"
                                                     >
-                                                        {item.message}
-                                                        <br />
-                                                        <span className="text-white"> {item.price} </span>
+                                                        <div>{item.message}</div>
+                                                        <div className="text-white"> {item.price} </div>
                                                     </button>
                                                 )
                                             })}
