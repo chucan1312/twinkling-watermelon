@@ -62,6 +62,10 @@ function App() {
                         {/* Content */}
                         <div className="relative z-10 text-white">
                             <CoinCount coin={player.coins} />
+                            <div className="absolute z-20 top-70 left-150">
+                                <img src="images/microphone.png" className=""/>
+                            </div>
+
                         </div>
 
                     </div>

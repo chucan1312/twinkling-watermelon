@@ -1,5 +1,12 @@
 package com.example.backend.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 public class Player {
 
     private Long id;
@@ -7,6 +14,7 @@ public class Player {
     private long coins;
     private double coinsPerSecond;
     private long lastTickTimestamp;
+    private Set<String> inventory = new HashSet<>();
 
     public Player(Long id, String name) {
         this.id = id;
@@ -36,6 +44,10 @@ public class Player {
         return lastTickTimestamp; 
     }
 
+    public Set<String> getInventory() {
+        return inventory;
+    }
+
     public void setCoins(long coins) { 
         this.coins = coins; 
     }
@@ -46,5 +58,13 @@ public class Player {
     
     public void setLastTickTimestamp(long ts) { 
         this.lastTickTimestamp = ts; 
+    }
+
+    public boolean hasItem(String item) {
+        return inventory.contains(item);
+    }
+
+    public void addItem(String item) {
+        inventory.add(item);
     }
 }
