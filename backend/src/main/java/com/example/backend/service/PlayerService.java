@@ -40,12 +40,12 @@ public class PlayerService {
 
         long now = System.currentTimeMillis();
         long elapsedMillis = now - p.getLastTickTimestamp();
-        double elapsedSeconds = elapsedMillis / 1000.0;
+        long elapsedSeconds = elapsedMillis / 1000; // whole seconds only
+        long earned = elapsedSeconds * (long) p.getCoinsPerSecond();
 
-        long earned = (long) (elapsedSeconds * p.getCoinsPerSecond());
         p.setCoins(p.getCoins() + earned);
-        p.setLastTickTimestamp(now);
-
+        p.setLastTickTimestamp(p.getLastTickTimestamp() + elapsedSeconds * 1000L);
+        
         return p;
     }
 
@@ -57,24 +57,22 @@ public class PlayerService {
 
         if (!ItemData.isValidItem(item)) {
             throw new ResponseStatusException(
-            HttpStatus.BAD_REQUEST,
-            "Invalid item: " + item);
+                    HttpStatus.BAD_REQUEST,
+                    "Invalid item: " + item);
         }
 
         Integer price = ItemData.getPrice(item);
         if (p.hasItem(item)) {
             throw new ResponseStatusException(
-            HttpStatus.CONFLICT,
-            "Already own: " + item
-            );
+                    HttpStatus.CONFLICT,
+                    "Already own: " + item);
         }
-        
+
         if (p.getCoins() < price) {
             throw new ResponseStatusException(
-            HttpStatus.FORBIDDEN,
-            "Not enough coins to buy " + item
-            );
-        }   
+                    HttpStatus.FORBIDDEN,
+                    "Not enough coins to buy " + item);
+        }
 
         p.addItem(item);
         p.setCoins(p.getCoins() - price);

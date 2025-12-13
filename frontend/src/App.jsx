@@ -147,7 +147,7 @@ function App() {
                                         key={itemName}
                                         src={item.image}
                                         className={
-                                            `absolute ${(itemName == "fairylight") ? "drop-shadow-[0_3px_4px_rgba(255,194,110,1)] scale-120" : ""}`
+                                            `absolute ${(itemName == "fairylight") ? "drop-shadow-[0_3px_3px_rgba(255,194,110,1)] scale-120" : ""}`
                                         }
                                         style={{ left: item.x, top: item.y, zIndex: item.z }}
                                     />
