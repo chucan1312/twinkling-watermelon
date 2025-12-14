@@ -49,6 +49,14 @@ public class PlayerService {
         return p;
     }
 
+    public Player clickTick(Long id, long value) {
+        Player p = players.get(id);
+        if (p == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Player not found");
+        p.setCoins(p.getCoins() + value);
+        
+        return p;
+    }
+
     public Player purchase(Long id, String item) {
         Player p = players.get(id);
         if (p == null) {

@@ -11,9 +11,12 @@ public class ItemData {
     private static final Map<String, Integer> ITEM_PRICES = new HashMap<>();
 
     static {
+        ITEM_PRICES.put("logo", 50);
+        ITEM_PRICES.put("poster", 50);
         ITEM_PRICES.put("microphone", 100);
         ITEM_PRICES.put("fairylight", 150);
-        ITEM_PRICES.put("poster", 50);
+        ITEM_PRICES.put("drumset", 300);
+        
     }
 
     public static int getPrice(String itemName) {

@@ -15,11 +15,10 @@ import com.example.backend.service.PlayerService;
 @RequestMapping("/api/player")
 @CrossOrigin(origins = "http://localhost:5173")
 
-
 public class PlayerController {
-    private final PlayerService playerService;  
+    private final PlayerService playerService;
 
-    public PlayerController(PlayerService playerService) {  
+    public PlayerController(PlayerService playerService) {
         this.playerService = playerService;
     }
 
@@ -38,8 +37,18 @@ public class PlayerController {
         return playerService.tick(id);
     }
 
-    @PostMapping("/{id}/purchase/{item}")
-    public Player purchasePlayer(@PathVariable Long id, @PathVariable String item) {
+    @PostMapping("/{id}/purchase")
+    public Player purchasePlayer(
+            @PathVariable Long id,
+            @RequestParam String item) {
         return playerService.purchase(id, item);
     }
+
+    @PostMapping("/{id}/clicktick")
+    public Player clickTickPlayer(
+            @PathVariable Long id,
+            @RequestParam Long value) {
+        return playerService.clickTick(id, value);
+    }
+
 }
