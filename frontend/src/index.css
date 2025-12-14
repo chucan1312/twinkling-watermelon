@@ -33,7 +33,7 @@ body {
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: transparent; 
+    background: transparent;
 
     /* PIXEL ROUNDED CORNERS */
     box-shadow:
@@ -41,6 +41,137 @@ body {
         0 -4px 0 0 rgb(171, 122, 66),
         0 4px 0 0 rgb(171, 122, 66),
         -4px 0 0 0 rgb(171, 122, 66),
-        4px 0 0 0 rgb(171, 122, 66)
-    ;
+        4px 0 0 0 rgb(171, 122, 66);
+}
+
+@keyframes melon-pop {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    
+    35% {
+        transform: scale(0.1);
+        opacity: 0.2;
+    }
+
+    45% {
+        transform: scale(0.2);
+        opacity: 0.45;
+    }
+
+    50% {
+        transform: scale(0.3);
+        opacity: 0.5;
+    }
+
+    58% {
+        transform: scale(0.5);
+        opacity: 0.75;
+    }
+
+    70% {
+        transform: scale(0.75);
+        opacity: 1;
+    }
+
+    75% {
+        transform: scale(0.8);
+        opacity: 1;
+    }
+
+    85% {
+        transform: scale(0.75);
+    }
+
+    92% {
+        transform: scale(0.6);
+    }
+
+    100% {
+        transform: scale(0.5);
+    }
+    
+}
+
+@keyframes sparkle-1-pop {
+    0% {
+        transform: scale(0.2);
+        opacity: 1;
+    }
+
+    11% {
+        transform: scale(0.5);
+    }
+
+    22% {
+        transform: scale(0.75);
+    }
+
+    33% {
+        transform: scale(1);
+        
+    }
+
+    44% {
+        transform: scale(1);
+
+    }
+    45% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+
+@keyframes sparkle-2-pop {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    45% {
+        transform: scale(0.9);
+        opacity: 1;
+    }
+
+    65% {
+        transform: scale(1.1);
+        
+    }
+
+    66% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes sparkle-3-pop {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    66% {
+        transform: scale(1.1);   
+    }
+
+    88% {
+        transform: scale(1.2);
+        opacity: 0.75;
+    }
+
+    
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
 }

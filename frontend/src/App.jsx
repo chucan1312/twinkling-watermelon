@@ -55,7 +55,9 @@ function App() {
     const [nameInput, setNameInput] = useState("");
     const [open, setOpen] = useState(false);
     const [showWatermelon, setShowWatermelon] = useState(false);
+    const [melonPos, setMelonPos] = useState({ x: 50, y: 50 });
     const [error, setError] = useState(null);
+    const [bonus, setBonus]= useState(0);
 
     async function createPlayer() {
         const res = await api.post(`/init?name=${nameInput}`);
@@ -83,14 +85,23 @@ function App() {
         }
     }
 
+    // Randomize bonus coins 
+    useEffect(() => {
+        if (!showWatermelon) return;
+      
+        const value = (Math.round(Math.random() * 5 + 1) * 5);
+        setBonus(value);
+      }, [showWatermelon]);
+
     async function clickTick() {
         try {
             const res = await api.post(
                 `/${player.id}/clicktick`,
                 null,
-                { params: { value: 1 } }
+                { params: { value: bonus} }
             );
             setPlayer(res.data);
+            
         } catch (err) {
             const msg = err.response?.data?.message || "Error";
             setError(msg);
@@ -125,11 +136,20 @@ function App() {
             // hide after 2 seconds
             setTimeout(() => {
                 setShowWatermelon(false);
-            }, 2000);
-        }, 5000);
+            }, 4000);
+        }, 8000);
 
         return () => clearInterval(interval);
     }, []);
+
+    useEffect(() => {
+        if (!showWatermelon) return;
+
+        setMelonPos({
+            x: Math.random() * 80 + 10, // percent
+            y: Math.random() * 60 + 10,
+        });
+    }, [showWatermelon]);
 
     return (
         <div>
@@ -222,16 +242,36 @@ function App() {
                     </div>
                     {showWatermelon && (
                         <div
-                            className="fixed top-1/3 left-1/2 -translate-x-1/2 z-[9999]"
+                            className="fixed z-[200]"
+                            style={{
+                                left: `${melonPos.x}%`,
+                                top: `${melonPos.y}%`,
+                                transform: "translate(-50%, -50%)",
+                            }}
                             onClick={clickTick}
                         >
-                            <img
-                                src="/images/watermelonCount.png"
-                                className="w-16 h-16 cursor-pointer"
-                                alt="watermelon"
-                            />
+                            <div className="relative">
+                                <img
+                                    src="/images/sparkle-frame-1.png"
+                                    className="w-35 h-35 animate-[sparkle-1-pop_0.35s_steps(1,end)] absolute z-210 [animation-fill-mode:forwards] drop-shadow-[0_0_8px_rgba(255,194,110,1)]"
+                                />
+                                <img
+                                    src="/images/sparkle-frame-2.png"
+                                    className="w-35 h-35 animate-[sparkle-2-pop_0.35s_steps(1,end)] absolute z-210 [animation-fill-mode:forwards] drop-shadow-[0_0_8px_rgba(255,194,110,1)]"
+                                />
+                                <img
+                                    src="/images/sparkle-frame-3.png"
+                                    className="w-35 h-35 animate-[sparkle-3-pop_0.35s_steps(1,end)] absolute z-210 [animation-fill-mode:forwards] drop-shadow-[0_0_8px_rgba(255,194,110,1)]"
+                                />
+                                <img
+                                    src="/images/watermelonCount.png"
+                                    className="w-35 h-35 cursor-pointer animate-[melon-pop_0.25s_cubic-bezier(0.2,1.4,0.4,1)] [animation-fill-mode:forwards]"
+                                />
+                            </div>
+
                         </div>
                     )}
+
                 </div>
             )}
         </div>
