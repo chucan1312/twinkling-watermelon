@@ -23,6 +23,50 @@ A pixel-art idle game where players earn coins by clicking floating watermelons,
 
 ---
 
+## 🚀 Run Locally
+
+### Prerequisites
+
+Make sure you have the following installed:
+
+- Node.js (v16 or higher)
+- Java 21
+- Maven
+
+---
+
+### Backend Setup
+
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+
+2. Build and run the Spring Boot server:
+   ```bash
+   mvn clean install  
+   mvn spring-boot:run
+
+The backend will start at:
+http://localhost:8080
+
+---
+
+### Frontend Setup
+
+1. Navigate to the frontend directory:
+   ```bash
+   cd frontend
+
+2. Install dependencies and start the development server:
+   ```bash
+   npm install  
+   npm run dev
+
+The frontend will be available at:
+http://localhost:5173
+
+---
+
 ## 🛠️ Tech Stack
 
 Frontend:
