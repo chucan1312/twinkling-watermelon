@@ -57,7 +57,8 @@ function App() {
     const [showWatermelon, setShowWatermelon] = useState(false);
     const [melonPos, setMelonPos] = useState({ x: 50, y: 50 });
     const [error, setError] = useState(null);
-    const [bonus, setBonus]= useState(0);
+    const [bonus, setBonus] = useState(0);
+    const [clickEffect, setClickEffect] = useState(false);
 
     async function createPlayer() {
         const res = await api.post(`/init?name=${nameInput}`);
@@ -88,33 +89,46 @@ function App() {
     // Randomize bonus coins 
     useEffect(() => {
         if (!showWatermelon) return;
-      
+
         const value = (Math.round(Math.random() * 5 + 1) * 5);
         setBonus(value);
-      }, [showWatermelon]);
+    }, [showWatermelon]);
 
     async function clickTick() {
         try {
             const res = await api.post(
                 `/${player.id}/clicktick`,
                 null,
-                { params: { value: bonus} }
+                { params: { value: bonus } }
             );
             setPlayer(res.data);
-            
+
         } catch (err) {
             const msg = err.response?.data?.message || "Error";
             setError(msg);
             setTimeout(() => setError(null), 2000);
         }
+        setClickEffect(true);
         setShowWatermelon(false);
     }
 
+    // Tick player to add coins
     useEffect(() => {
         if (!player) return;
         const interval = setInterval(tickPlayer, 1000);
         return () => clearInterval(interval);
     }, [player]);
+
+    // Add effect after collecting/clicking coin
+    useEffect(() => {
+        if (!clickEffect) return;
+
+        const timeout = setTimeout(() => {
+            setClickEffect(false);
+        }, 2000);
+
+        return () => clearTimeout(timeout);
+    }, [clickEffect]);
 
     const purchasableItems = player
         ? SHOP_ITEMS.filter(
@@ -162,9 +176,9 @@ function App() {
                     <input
                         value={nameInput}
                         onChange={(e) => setNameInput(e.target.value)}
-                        className="border border-[#8b5a2b] p-2 w-100 lg:w-130 focus:outline-none focus:border-2 focus:placeholder-transparent"
+                        className="text-cursor border border-[#8b5a2b] p-2 w-100 lg:w-130 focus:outline-none focus:border-2 focus:placeholder-transparent"
                         placeholder="Enter your name..."
-                    />
+                    /> 
                     <button
                         onClick={createPlayer}
                         className="start-btn w-100 lg:w-130"
@@ -189,7 +203,7 @@ function App() {
                             <div className="flex flex-row items-start">
                                 <button
                                     onClick={() => setOpen(!open)}
-                                    className="relative px-2 py-5 border-4 border-r-0 border-[rgb(171,122,66)] bg-[#f0c76e] hover:bg-[#e0b65a]"
+                                    className="relative pointer px-2 py-5 border-4 border-r-0 border-[rgb(171,122,66)] bg-[#f0c76e] hover:bg-[#e0b65a]"
                                 >
                                     {open ? (
                                         <img src="./images/right-arrow.png" />
@@ -200,6 +214,7 @@ function App() {
 
                                 {open && (
                                     <div className="grid grid-cols-1 gap-5 p-5 border-4 border-r-0 border-[rgb(171,122,66)] backdrop-blur-xl">
+                                        <div>Items and Upgrades:</div>
                                         {purchasableItems.map((item) => (
                                             <button
                                                 key={item.name}
@@ -253,22 +268,37 @@ function App() {
                             <div className="relative">
                                 <img
                                     src="/images/sparkle-frame-1.png"
-                                    className="w-35 h-35 animate-[sparkle-1-pop_0.35s_steps(1,end)] absolute z-210 [animation-fill-mode:forwards] drop-shadow-[0_0_8px_rgba(255,194,110,1)]"
+                                    className="w-35 h-35 pointer animate-[sparkle-1-pop_0.35s_steps(1,end)] absolute z-210 [animation-fill-mode:forwards] drop-shadow-[0_0_8px_rgba(255,194,110,1)]"
                                 />
                                 <img
                                     src="/images/sparkle-frame-2.png"
-                                    className="w-35 h-35 animate-[sparkle-2-pop_0.35s_steps(1,end)] absolute z-210 [animation-fill-mode:forwards] drop-shadow-[0_0_8px_rgba(255,194,110,1)]"
+                                    className="w-35 h-35 pointer animate-[sparkle-2-pop_0.35s_steps(1,end)] absolute z-210 [animation-fill-mode:forwards] drop-shadow-[0_0_8px_rgba(255,194,110,1)]"
                                 />
                                 <img
                                     src="/images/sparkle-frame-3.png"
-                                    className="w-35 h-35 animate-[sparkle-3-pop_0.35s_steps(1,end)] absolute z-210 [animation-fill-mode:forwards] drop-shadow-[0_0_8px_rgba(255,194,110,1)]"
+                                    className="w-35 h-35 pointer animate-[sparkle-3-pop_0.35s_steps(1,end)] absolute z-210 [animation-fill-mode:forwards] drop-shadow-[0_0_8px_rgba(255,194,110,1)]"
                                 />
                                 <img
                                     src="/images/watermelonCount.png"
-                                    className="w-35 h-35 cursor-pointer animate-[melon-pop_0.25s_cubic-bezier(0.2,1.4,0.4,1)] [animation-fill-mode:forwards]"
+                                    className="w-35 h-35 pointer animate-[melon-pop_0.25s_cubic-bezier(0.2,1.4,0.4,1)] [animation-fill-mode:forwards]"
                                 />
                             </div>
 
+                        </div>
+                    )}
+
+                    {clickEffect && (
+                        <div
+                            className="fixed z-[200]"
+                            style={{
+                                left: `${melonPos.x}%`,
+                                top: `${melonPos.y - 6}%`,
+                                transform: "translate(-50%, -50%)",
+                            }}
+                        >
+                            <div className="bonus-display text-white text-4xl text-outline">
+                                +{bonus}
+                            </div>
                         </div>
                     )}
 
