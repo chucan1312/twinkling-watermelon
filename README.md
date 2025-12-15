@@ -1,3 +1,6 @@
+
+<img width="1367" height="328" alt="wallpaper" src="https://github.com/user-attachments/assets/3720f946-bba5-49dd-958b-1d5cdefbbb58" />
+
 # 🍉 First Love Memory Manipulator
 
 A pixel-art idle game where players earn coins by clicking floating watermelons, purchase upgrades, and decorate a cozy band room — all enhanced with music, animations, and visual effects. Inspired by the kdrama Twinkling Watermelon.
