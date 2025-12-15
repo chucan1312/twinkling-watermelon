@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { api } from "./api";
 import { CoinCount } from "./components/CoinCount";
+import { MusicBar } from "./components/MusicBar";
 
 const SHOP_ITEMS = [
     {
@@ -178,7 +179,7 @@ function App() {
                         onChange={(e) => setNameInput(e.target.value)}
                         className="text-cursor border border-[#8b5a2b] p-2 w-100 lg:w-130 focus:outline-none focus:border-2 focus:placeholder-transparent"
                         placeholder="Enter your name..."
-                    /> 
+                    />
                     <button
                         onClick={createPlayer}
                         className="start-btn w-100 lg:w-130"
@@ -301,7 +302,8 @@ function App() {
                             </div>
                         </div>
                     )}
-
+                    <MusicBar />
+                    
                 </div>
             )}
         </div>

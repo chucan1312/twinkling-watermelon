@@ -2,15 +2,15 @@
 
 body {
     font-family: "Pixelify Sans", "ＭＳ Ｐゴシック", sans-serif;
-    cursor: url("/images/cursor-normal.png"), auto;
+    cursor: url("/images/cursor-normal.png") 0 0, auto;
 }
 
 .pointer {
-    cursor: url("/images/cursor-pointer.png"), pointer;
+    cursor: url("/images/cursor-pointer.png") 0 3, pointer;
 }
 
 .text-cursor {
-    cursor: url("/images/cursor-type.png"), text;
+    cursor: url("/images/cursor-type.png") 0 0, text;
 }
 
 button:hover {
@@ -50,7 +50,7 @@ button:hover {
     /* PIXEL ROUNDED CORNERS */
     box-shadow:
         /* Sides */
-        0 -4px 0 0 rgb(171, 122, 66),
+        0 -4px 0 0 rgb(171, 122, 66), 
         0 4px 0 0 rgb(171, 122, 66),
         -4px 0 0 0 rgb(171, 122, 66),
         4px 0 0 0 rgb(171, 122, 66);
