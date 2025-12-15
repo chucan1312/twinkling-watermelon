@@ -46,7 +46,7 @@ const SHOP_ITEMS = [
         y: 340,
         z: 30,
         price: "300 watermelons",
-        image: "/images/drumset.png",
+        image: "/images/drumkit.png",
         message: "Si-guk's drumset",
     },
 ];
@@ -303,7 +303,7 @@ function App() {
                         </div>
                     )}
                     <MusicBar />
-                    
+
                 </div>
             )}
         </div>
